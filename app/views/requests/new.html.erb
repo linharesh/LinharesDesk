@@ -1,5 +1,37 @@
-<h1>New Request</h1>
+<h1>Nova Solicitação</h1>
 
-<%= render 'form' %>
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Título' %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label 'Descrição' %><br>
+    <%= f.text_field :description, :size=> 40 %>
+  </div>
+  <div class="field">
+    <%= f.label 'Nome Completo' %><br>
+    <%= f.text_field :sender %>
+  </div>
+  <div class="field">
+    <%= f.label 'E-Mail' %><br>
+    <%= f.text_field :senderemail %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Enviar Solicitação'%>
+  </div>
+<% end %>
 
 <%= link_to 'Back', requests_path %>
